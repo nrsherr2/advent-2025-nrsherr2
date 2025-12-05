@@ -55,6 +55,25 @@ fun <T> List<List<List<T>>>.access(point: Point3D) = when {
 fun manhattanDistance(p1: Point, p2: Point) = abs(p1.x - p2.x) + abs(p1.y - p2.y)
 fun manhattanDistance(p1: Point3D, p2: Point3D) = abs(p1.x - p2.x) + abs(p1.y - p2.y) + abs(p1.z - p2.z)
 
+fun Point.neighborCoords(numRows: Int? = null, numCols: Int? = null): Neighbors<Point?> {
+    fun Point.verify(): Point? = when {
+        numRows == null || numCols == null -> this
+        this.rowNum !in 0..<numRows -> null
+        this.colNum !in 0..<numCols -> null
+        else -> this
+    }
+    return Neighbors(
+        this.copy(rowNum = this.rowNum - 1, colNum = this.colNum - 1).verify(),
+        this.copy(rowNum = this.rowNum - 1).verify(),
+        this.copy(rowNum = this.rowNum - 1, colNum = this.colNum + 1).verify(),
+        this.copy(colNum = this.colNum - 1).verify(),
+        this.verify(),
+        this.copy(colNum = this.colNum + 1).verify(),
+        this.copy(rowNum = this.rowNum + 1, colNum = this.colNum - 1).verify(),
+        this.copy(rowNum = this.rowNum + 1, colNum = this.colNum).verify(),
+        this.copy(rowNum = this.rowNum + 1, colNum = this.colNum + 1).verify()
+    )
+}
 
 data class Neighbors<T>(
     val topLeft: T?,
@@ -87,7 +106,7 @@ fun <T> List<List<T>>.neighborsOf(point: Point) = Neighbors(
     access(point.copy(rowNum = point.rowNum - 1, colNum = point.colNum + 1)),
     access(point.copy(colNum = point.colNum - 1)),
     access(point),
-    access(point.copy(colNum = point.colNum - 1)),
+    access(point.copy(colNum = point.colNum + 1)),
     access(point.copy(rowNum = point.rowNum + 1, colNum = point.colNum - 1)),
     access(point.copy(rowNum = point.rowNum + 1, colNum = point.colNum)),
     access(point.copy(rowNum = point.rowNum + 1, colNum = point.colNum + 1)),

@@ -25,8 +25,8 @@ class Day03 : DaySolution {
      * BOAT MODE FUCK YEAH
      */
     override fun solvePart2() {
-        val soln = parseInput().sumOf { part2(it) }
-        println("*** Part 2 sum: $soln")
+//        val soln = parseInput().sumOf { part2(it) }
+//        println("*** Part 2 sum: $soln")
 
     }
 
@@ -77,7 +77,7 @@ class Day03 : DaySolution {
             }
             currentLayer = nextLayer.sortedByDescending { it.str.toLong() }.take(250).toSet()
         }
-        println("current size: ${currentLayer.size}")
+//        println("current size: ${currentLayer.size}")
 //    println(currentLayer.maxBy { it.str.toLong() })
         return currentLayer.maxOf { it.str.toLong() }
     }
