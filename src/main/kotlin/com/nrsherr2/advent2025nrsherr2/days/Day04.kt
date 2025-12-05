@@ -6,7 +6,7 @@ import com.nrsherr2.advent2025nrsherr2.utils.Point
 import com.nrsherr2.advent2025nrsherr2.utils.neighborCoords
 import com.nrsherr2.advent2025nrsherr2.utils.readInput
 
-@Day(3)
+@Day(4)
 class Day04 : DaySolution {
     override fun testPart1() {
         val res = part1(readInput("test/Day04"))
