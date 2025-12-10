@@ -70,6 +70,7 @@ fun euclideanDistance(p1: Point3D, p2: Point3D): Double =
                 (p1.y - p2.y).toDouble().pow(2) +
                 (p1.z - p2.z).toDouble().pow(2)
     )
+
 fun squaredEuclideanDistance(p1: Point, p2: Point): Long {
     val dx = p1.x - p2.x
     val dy = p1.y - p2.y
@@ -200,3 +201,4 @@ fun <T> MutableList<T>.rotate(): T {
     this.add(latest)
     return latest
 }
+typealias Connection = Pair<Point3D, Point3D>
