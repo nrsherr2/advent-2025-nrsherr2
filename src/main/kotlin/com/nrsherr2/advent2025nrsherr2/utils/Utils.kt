@@ -2,6 +2,8 @@ package com.nrsherr2.advent2025nrsherr2.utils
 
 import java.io.File
 import kotlin.math.abs
+import kotlin.math.pow
+import kotlin.math.sqrt
 
 /**
  * Reads lines from the given input txt file.
@@ -54,6 +56,32 @@ fun <T> List<List<List<T>>>.access(point: Point3D) = when {
 
 fun manhattanDistance(p1: Point, p2: Point) = abs(p1.x - p2.x) + abs(p1.y - p2.y)
 fun manhattanDistance(p1: Point3D, p2: Point3D) = abs(p1.x - p2.x) + abs(p1.y - p2.y) + abs(p1.z - p2.z)
+
+
+fun euclideanDistance(p1: Point, p2: Point): Double =
+    sqrt(
+        (p1.x - p2.x).toDouble().pow(2) +
+                (p1.y - p2.y).toDouble().pow(2)
+    )
+
+fun euclideanDistance(p1: Point3D, p2: Point3D): Double =
+    sqrt(
+        (p1.x - p2.x).toDouble().pow(2) +
+                (p1.y - p2.y).toDouble().pow(2) +
+                (p1.z - p2.z).toDouble().pow(2)
+    )
+fun squaredEuclideanDistance(p1: Point, p2: Point): Long {
+    val dx = p1.x - p2.x
+    val dy = p1.y - p2.y
+    return dx.toLong() * dx + dy.toLong() * dy
+}
+
+fun squaredEuclideanDistance(p1: Point3D, p2: Point3D): Long {
+    val dx = p1.x - p2.x
+    val dy = p1.y - p2.y
+    val dz = p1.z - p2.z
+    return dx.toLong() * dx + dy.toLong() * dy + dz.toLong() * dz
+}
 
 fun Point.neighborCoords(numRows: Int? = null, numCols: Int? = null): Neighbors<Point?> {
     fun Point.verify(): Point? = when {
