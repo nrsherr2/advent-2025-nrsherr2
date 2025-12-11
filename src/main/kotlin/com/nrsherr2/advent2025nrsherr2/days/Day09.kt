@@ -31,13 +31,7 @@ class Day09 : DaySolution {
         val innerMaxY = max(pointA.y, pointB.y)
         val innerMinX = (min(pointA.x, pointB.x) + 1)
         val innerMaxX = max(pointA.x, pointB.x)
-//        val inner = buildList {
-//            for (y in innerMinY..<innerMaxY) {
-//                for (x in innerMinX..<innerMaxX) {
-//                    add(Point(y, x))
-//                }
-//            }
-//        }
+
 
         fun intersects(l: LineSegment): Boolean {
             if (l.pointA.y == l.pointB.y) {
@@ -68,21 +62,11 @@ class Day09 : DaySolution {
                 }
             } else {
                 throw IllegalArgumentException()
-//                return l.points.any { it in inner }
             }
-            return false
         }
     }
 
-    class LineSegment(val pointA: Point, val pointB: Point) {
-//        val points = buildList {
-//            for (y in min(pointA.y, pointB.y)..max(pointA.y, pointB.y)) {
-//                for (x in min(pointA.x, pointB.x)..max(pointA.x, pointB.x)) {
-//                    add(Point(y, x))
-//                }
-//            }
-//        }
-    }
+    class LineSegment(val pointA: Point, val pointB: Point)
 
     private fun part2(readInput: List<String>): Long {
         val points = readInput.map {
@@ -99,14 +83,9 @@ class Day09 : DaySolution {
                 val area = (abs(pointA.x - pointB.x) + 1L) * (abs(pointA.y - pointB.y) + 1L)
                 println("testing rect with area: $area")
                 val rect = Rectangle(pointA, pointB)
-                println(".")
-                if (lines.none {
-//                        println("testing line with area ${(abs(it.pointA.x - it.pointB.x) + 1L) * (abs(it.pointA.y - it.pointB.y) + 1L)}")
-                        rect.intersects(it)
-                    }) {
+                if (lines.none { rect.intersects(it) }) {
                     maxArea = max(maxArea, area)
                 }
-                println(".")
             }
         }
         return maxArea
