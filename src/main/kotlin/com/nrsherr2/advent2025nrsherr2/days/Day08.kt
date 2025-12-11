@@ -67,15 +67,11 @@ class Day08 : DaySolution {
     }
 
     private fun part1(points: List<Point3D>, maxLen: Int, isTesting: Boolean = false): Int {
-        var sortedConnections = listOf<Pair<Connection, Long>>()
-        points.forEachIndexed { index, a ->
-            points.subList(index + 1, points.size).forEach { b ->
-                sortedConnections = sortedConnections.insertSorted(Connection(a, b), maxLen)
-            }
-        }
+
+        val sortedConnections = buildDistanceMap(points).toList().sortedBy { (_, value) -> value }
 
         val circuits = points.map { mutableListOf(it) }.toMutableList()
-        sortedConnections.forEach { (points, distance) ->
+        sortedConnections.take(maxLen).forEach { (points, distance) ->
             val circuitContainsA = circuits.indexOfFirst { it.contains(points.first) }
             val circuitContainsB = circuits.indexOfFirst { it.contains(points.second) }
             when {

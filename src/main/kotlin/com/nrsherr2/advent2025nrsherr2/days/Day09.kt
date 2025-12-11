@@ -81,7 +81,7 @@ class Day09 : DaySolution {
             for (j in i + 1 until points.size) {
                 val pointB = points[j]
                 val area = (abs(pointA.x - pointB.x) + 1L) * (abs(pointA.y - pointB.y) + 1L)
-                println("testing rect with area: $area")
+//                println("testing rect with area: $area")
                 val rect = Rectangle(pointA, pointB)
                 if (lines.none { rect.intersects(it) }) {
                     maxArea = max(maxArea, area)
