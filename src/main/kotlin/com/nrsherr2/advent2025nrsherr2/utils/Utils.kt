@@ -104,6 +104,26 @@ fun Point.neighborCoords(numRows: Int? = null, numCols: Int? = null): Neighbors<
     )
 }
 
+fun Point.orthogonalNeighborCoords(numRows: Int? = null, numCols: Int? = null): Neighbors<Point?> {
+    fun Point.verify(): Point? = when {
+        numRows == null || numCols == null -> this
+        this.rowNum !in 0..<numRows -> null
+        this.colNum !in 0..<numCols -> null
+        else -> this
+    }
+    return Neighbors(
+        null,
+        this.copy(rowNum = this.rowNum - 1).verify(),
+        null,
+        this.copy(colNum = this.colNum - 1).verify(),
+        this.verify(),
+        this.copy(colNum = this.colNum + 1).verify(),
+        null,
+        this.copy(rowNum = this.rowNum + 1, colNum = this.colNum).verify(),
+        null
+    )
+}
+
 data class Neighbors<T>(
     val topLeft: T?,
     val topMid: T?,
